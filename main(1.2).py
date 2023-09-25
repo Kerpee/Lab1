@@ -1,4 +1,7 @@
-f=open('books.csv')
+fi=input("Введите название файла 'books.csv' или 'books-en.csv':")
+if fi!='books-en.csv' and fi!="books.csv":
+    print("Неверно указано название файла")
+f=open(fi)
 head=f.readline()#Считываем заголовок
 cnt=0#Вводим счетчик
 head=head.replace("\n",'')#Убираем \n из списка
