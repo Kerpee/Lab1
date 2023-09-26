@@ -12,12 +12,10 @@ for s in f:#Проходим по файлу
 for i in range(len(a)-1):# Проходим по списку книг, не считая последний элемент,т.к. он пустой
     q=a[i][0].split(";")#Разделяем информацию про книгу на отдельные элементы
     spisok.append(q)#Добавляем информацию про книгу в список
-vvod=input("Введите фамилию автора:")#Получаем фамилию автора для поиска
+vvod=input("Введите имя и фамилию автора:")#Получаем фамилию автора для поиска
 for i in range(len(spisok)):#Проходим по списку книг
-    if fi=='books.csv':
-        if (vvod in spisok[i][3]) or (vvod in spisok[i][4]) and int(spisok[i][6][6:10])<2016:
-            print(spisok[i][1])
-    else:
-        print(spisok)
-        if int(spisok[i][3])<2016 and vvod in spisok[i][2]:
-            print(spisok[i][1])
+    if fi=='books.csv':#Проверяем выбранный файл
+        if (vvod == spisok[i][3]) or (vvod == spisok[i][4]) and int(spisok[i][6][6:10])<2016:#Проверяем условие
+            print(spisok[i][1])#Выводим ответ
+    elif ((fi=="books-en.csv" and (vvod in spisok[i][2]))):#В случае если файл с иностранными книгами, мы не проверяем год,т.к. там нет ни одной книги после 2016 года
+        print(spisok[i][1])#Выводим ответ
