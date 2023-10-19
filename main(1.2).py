@@ -1,24 +1,16 @@
-fi=input("Введите название файла 'books.csv' или 'books-en.csv':")
-if fi!='books-en.csv' and fi!="books.csv":
+MAX_LEN = 30
+MIN_LEN_BOOK = 1
+inf_file = input("Введите название файла 'books.csv' или 'books-en.csv':")
+if inf_file != 'books-en.csv' and inf_file != "books.csv":
     print("Неверно указано название файла")
-f=open(fi)
-head=f.readline()#Считываем заголовок
-cnt=0#Вводим счетчик
-head=head.replace("\n",'')#Убираем \n из списка
-h=head.split(";")#Разделяем заголовок
-a=[]#Вводим список для информации про книги
-for s in f:#Проходим по файлу
-    i=f.readline()#Считываем информацию про книги
-    i=i.split("\n")#Разделяем информацию по строчкам
-    a.append(i)#Добавляем все книги в список
-for i in range(len(a)-1):# Проходим по списку книг, не считая последний элемент,т.к. он пустой
-    q=a[i][0].split(";")#Разделяем информацию про книгу на отдельные элементы
-    if (len(q[1]))>=30:#Проверяем длину название
-        cnt+=1#Обновляем счетчик
-f.close()#Закрываем файл
-print(cnt)#Выводим ответ
-
-
-
-
-
+with open(inf_file) as csv_file:
+    head = csv_file.readline()
+    cnt_of_str = 0
+    head = head.replace("\n", '')
+    for s in csv_file:
+        book = csv_file.readline()
+        book = book.replace("\n", '')
+        book = book.split(";")
+        if (len(book) > MIN_LEN_BOOK) and (len(book[1])) >= MAX_LEN:
+            cnt_of_str += 1
+print(f"Количество книг с названием в более чем 30 символов:{cnt_of_str}")

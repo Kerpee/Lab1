@@ -1,21 +1,18 @@
-fi=input("Введите название файла 'books.csv' или 'books-en.csv':")
-if fi!='books-en.csv' and fi!="books.csv":
+MIN_LEN_BOOK = 1
+YEAR = 2016
+name_of_file = input("Введите название файла 'books.csv' или 'books-en.csv':")
+if name_of_file != 'books-en.csv' and name_of_file != "books.csv":
     print("Неверно указано название файла")
-f=open(fi)
-head=f.readline()#Считываем заголовок
-a=[]#Вводим список для информации про книги
-spisok=[]
-for s in f:#Проходим по файлу
-    i=f.readline()#Считываем информацию про книги
-    i=i.split("\n")#Разделяем информацию по строчкам
-    a.append(i)#Добавляем все книги в список
-for i in range(len(a)-1):# Проходим по списку книг, не считая последний элемент,т.к. он пустой
-    q=a[i][0].split(";")#Разделяем информацию про книгу на отдельные элементы
-    spisok.append(q)#Добавляем информацию про книгу в список
-vvod=input("Введите имя и фамилию автора:")#Получаем фамилию автора для поиска
-for i in range(len(spisok)):#Проходим по списку книг
-    if fi=='books.csv':#Проверяем выбранный файл
-        if (vvod == spisok[i][3]) or (vvod == spisok[i][4]) and int(spisok[i][6][6:10])<2016:#Проверяем условие
-            print(spisok[i][1])#Выводим ответ
-    elif ((fi=="books-en.csv" and (vvod == spisok[i][2]))):#В случае если файл с иностранными книгами, мы не проверяем год,т.к. там нет ни одной книги после 2016 года
-            print(spisok[i][1])#Выводим ответ
+with open(name_of_file) as csv_file:
+
+    head = csv_file.readline()
+    author = input("Введите имя и фамилию автора:")
+    for s in csv_file:
+        book = csv_file.readline()
+        book = book.replace("\n", '')
+        book = book.split(";")
+        if name_of_file == 'books.csv':
+            if len(book) > MIN_LEN_BOOK and (((author == book[3]) or (author == book[4])) and int(book[6][6:10]) < YEAR):
+                print(book[1])
+        elif len(book) > MIN_LEN_BOOK and name_of_file == "books-en.csv" and author == book[2]:
+            print(book[1])
