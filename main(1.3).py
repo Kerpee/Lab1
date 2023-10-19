@@ -12,7 +12,7 @@ with open(name_of_file) as csv_file:
         book = book.replace("\n", '')
         book = book.split(";")
         if name_of_file == 'books.csv':
-            if len(book) > MIN_LEN_BOOK and (((author == book[3]) or (author == book[4])) and int(book[6][6:10]) < YEAR):
+            if len(book) > MIN_LEN_BOOK and ((author == book[3]) or (author == book[4])) and int(book[6][6:10]) < YEAR:
                 print(book[1])
         elif len(book) > MIN_LEN_BOOK and name_of_file == "books-en.csv" and author == book[2]:
             print(book[1])
